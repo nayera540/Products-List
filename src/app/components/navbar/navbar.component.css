@@ -1,0 +1,23 @@
+.navbar-custom{
+  background-color: #382ae1;
+  color: white;
+}
+
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: white !important;
+}
+
+.navbar-toggler {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #ffffff; /* Optional: white border */
+}
+
+.navbar-toggler .fas {
+  color: #382ae1; /* Color of the icon */
+}
+
+a:hover{
+  cursor: pointer;
+}
