@@ -14,3 +14,7 @@
 .custom-card {
   width: 100px;
 }
+
+.card:hover{
+  cursor: pointer;
+}
