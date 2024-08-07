@@ -1,0 +1,16 @@
+.col {
+
+  margin-bottom: 70px;
+}
+
+.col img {
+  width: 100px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.custom-card {
+  width: 100px;
+}

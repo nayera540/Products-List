@@ -1,1 +1,13 @@
-<p>productdetails works!</p>
+<div class="card-container">
+  <div class="card" style="width:400px; margin-bottom: 100px; border-radius: 15px;">
+    <img class="card-img-top" [src]="product.image" alt="Card image" style="height: 300px;">
+    <div class="card-body">
+      <h4 class="card-title">{{product.title}}</h4>
+      <p class="card-text">{{product.category}}</p>
+      <p class="card-text">{{product.description}}</p>
+      <p class="card-text">{{product.price}} $</p>
+      <p class="card-text"><i class="fa-solid fa-star-half-stroke" style="color: #FFD43B;"></i> {{product.rating.rate}} ({{product.rating.count}})</p>
+    </div>
+  </div>
+</div>
+

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../product';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-products-list',
   standalone: true,
@@ -13,7 +15,7 @@ export class ProductsListComponent implements OnInit {
   allProducts: Product[] = [];
   clickedProductId!: number;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.productService
@@ -22,7 +24,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   onProductClick(productId: number): void{
-    console.log(productId);
-    this.clickedProductId = productId;
+    this.router.navigate(['/product', productId]);
   }
 }

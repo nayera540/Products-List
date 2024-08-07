@@ -5,11 +5,13 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component:HomeComponent},
   {path: 'products', component:ProductsListComponent},
+  { path: 'product/:id', component: ProductdetailsComponent },
   {path: 'about', component:AboutUsComponent},
   {path: 'contact', component:ContactUsComponent},
   {path: '**', component:PageNotFoundComponent}
