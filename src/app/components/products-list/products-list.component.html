@@ -1,1 +1,18 @@
-<p>products-list works!</p>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col" *ngFor="let product of allProducts">
+    <div class="card" (click)="onProductClick(product.id)">
+      <img
+        [src]="product.image"
+        class="user__img card-img-top"
+        alt="profile image"
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ product.title }}
+        </h5>
+        <p class="card-text user__mail">{{ product.price }}</p>
+        <p class="card-text user__phone">{{ product.category }}</p>
+      </div>
+    </div>
+  </div>
+</div>
