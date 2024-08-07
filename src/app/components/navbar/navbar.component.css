@@ -22,3 +22,16 @@ a:hover{
   cursor: pointer;
 }
 
+.nav-link {
+  color: #ffffff; /* Default link color */
+  transition: opacity 0.3s ease;
+}
+
+.nav-link.inactive {
+  color: #dddddd93; /* Faded effect for inactive links */
+}
+
+.nav-link.active {
+  opacity: 1; /* Full opacity for the active link */
+  font-weight: bold; /* Optional: highlight the active link */
+}
