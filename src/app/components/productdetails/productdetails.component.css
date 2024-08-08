@@ -3,3 +3,52 @@
   justify-content: center;
   align-items: center;
 }
+
+.Action{
+  background-color: rgb(221, 19, 19);
+}
+
+.Adventure{
+  background-color: rgba(255, 68, 0, 0.671);
+}
+
+.Animation{
+  background-color: cadetblue;
+}
+
+.Family{
+  background-color: rgb(8, 165, 113);
+}
+
+.Comedy{
+  background-color: yellowgreen;
+}
+
+.Science.Fiction{
+  background-color: rgb(69, 69, 219);
+}
+
+.Crime{
+  background-color: rgb(235, 166, 18);
+}
+
+
+.Thriller{
+  background-color: brown;
+}
+
+.Horror{
+  background-color: rgb(148, 119, 182);
+}
+
+.History{
+  background-color: rgb(212, 124, 124);
+}
+
+.Drama{
+  background-color: rgb(243, 167, 74);
+}
+
+.War{
+  background-color: black;
+}

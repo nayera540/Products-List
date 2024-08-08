@@ -2,14 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Movie } from '../../movie';
+import { CommonModule, NgClass } from '@angular/common';
+
 
 @Component({
   selector: 'app-productdetails',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './productdetails.component.html',
   styleUrls: ['./productdetails.component.css']
 })
 export class ProductdetailsComponent implements OnInit {
-  movie!: Movie;
+  movie!: any;
 
   constructor(
     private route: ActivatedRoute,

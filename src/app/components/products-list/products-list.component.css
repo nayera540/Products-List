@@ -1,5 +1,4 @@
 .col {
-
   margin-bottom: 70px;
 }
 
@@ -15,6 +14,12 @@
   width: 100px;
 }
 
-.card:hover{
+.card:hover {
   cursor: pointer;
+}
+
+.paginator{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }

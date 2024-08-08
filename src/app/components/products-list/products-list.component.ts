@@ -3,7 +3,7 @@ import { Movie } from '../../movie';
 import { ProductService } from '../../services/product.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-list',
@@ -16,14 +16,25 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   allProducts: Movie[] = [];
   clickedProductId!: number;
   subscription!: Subscription;
-  constructor(private productService: ProductService, private router: Router) {}
+  currentPage: BehaviorSubject<number>;
+  page!:number;
+  totalPages!:number;
+
+
+  constructor(private productService: ProductService, private router: Router) {
+    this.currentPage = new BehaviorSubject<number>(this.page);
+  }
 
   ngOnInit(): void {
-    this.subscription = this.productService
-      .getAllMovies()
-      .subscribe((response) => {
-        this.allProducts = response.results;
-      });
+    this.currentPage.subscribe((newPage) => {
+      this.subscription = this.productService
+        .getAllMovies(newPage)
+        .subscribe((response) => {
+          this.allProducts = response.results
+          this.page = response.page;
+          this.totalPages = response.total_pages;
+        });
+    });
   }
 
   onProductClick(movieId: number): void {
@@ -33,6 +44,18 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+  }
+
+  onNextPage(){
+    if (this.page < this.totalPages) {
+      this.currentPage.next(++this.page);
+    }
+  }
+
+  onPrevPage(){
+    if(this.page > 1){
+      this.currentPage.next(--this.page);
     }
   }
 }

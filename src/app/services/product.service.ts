@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Movie } from '../movie'; // Import your Movie interface
+import { Movie } from '../movie';
+import { MovieResponse } from '../model/movie-response';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,12 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   // Get a list of popular movies
-  getAllMovies(): Observable<{ results: Movie[] }> {
-    return this.http.get<{ results: Movie[] }>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}`);
+  getAllMovies(pageNumber: number = 1): Observable<MovieResponse> {
+    return this.http.get<MovieResponse>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}&page=${pageNumber}`);
   }
 
   // Get a single movie by its ID
-  getMovieById(movieId: number): Observable<Movie> {
+  getMovieById(movieId: number): Observable<any> {
     return this.http.get<Movie>(`${this.baseUrl}/movie/${movieId}?api_key=${this.apiKey}`);
   }
 }

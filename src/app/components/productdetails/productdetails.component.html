@@ -5,6 +5,9 @@
       <h4 class="card-title">{{movie.title}}</h4>
       <p class="card-text">{{movie.overview}}</p>
       <p class="card-text">{{movie.release_date}}</p>
+      @for (genre of movie.genres; track $index) {
+        <span class="badge m-1" [ngClass]="genre.name">{{ genre.name }}</span>
+        }
     </div>
   </div>
 </div>
