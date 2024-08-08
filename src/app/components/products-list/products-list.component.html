@@ -2,7 +2,7 @@
   <div class="col" *ngFor="let product of allProducts">
     <div class="card" (click)="onProductClick(product.id)">
       <img
-        [src]="product.image"
+      [src]="'https://image.tmdb.org/t/p/original/' + product.poster_path"
         class="product__img card-img-top -block mx-auto"
         alt="product image"
       />
@@ -10,8 +10,7 @@
         <h5 class="card-title">
           {{ product.title }}
         </h5>
-        <p class="card-text product__price">{{ product.price }} $</p>
-        <p class="card-text product__phone">{{ product.category }}</p>
+        <p class="card-text product__phone">{{ product.release_date }}</p>
       </div>
     </div>
   </div>
