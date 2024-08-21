@@ -1,14 +1,17 @@
 <div class="card-container">
   <div class="card" style="width:400px; margin-bottom: 100px; border-radius: 15px;">
-    <img class="card-img-top" [src]="'https://image.tmdb.org/t/p/original/' + movie.poster_path" alt="Card image" style="height: 300px;">
+    <img
+      class="card-img-top"
+      [src]="product.image"
+      alt="Product image"
+      style="height: 300px;"
+    />
     <div class="card-body">
-      <h4 class="card-title">{{movie.title}}</h4>
-      <p class="card-text">{{movie.overview}}</p>
-      <p class="card-text">{{movie.release_date}}</p>
-      @for (genre of movie.genres; track $index) {
-        <span class="badge m-1" [ngClass]="genre.name">{{ genre.name }}</span>
-        }
+      <h4 class="card-title">{{ product.title }}</h4>
+      <p class="card-text">{{ product.description }}</p>
+      <p class="card-text">Price: {{ product.price | currency }}</p>
+      <p class="card-text">Category: {{ product.category }}</p>
+      <p class="card-text">Rating: {{ product.rating.rate }} ({{ product.rating.count }} reviews)</p>
     </div>
   </div>
 </div>
-

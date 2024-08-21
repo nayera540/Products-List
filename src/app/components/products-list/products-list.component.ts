@@ -1,61 +1,67 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Movie } from '../../movie';
+import { Product } from '../../product'; // Product model
 import { ProductService } from '../../services/product.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-list',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [CommonModule, NgFor, RouterModule, NgIf],
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
-  allProducts: Movie[] = [];
+  allProducts: Product[] = [];
   clickedProductId!: number;
   subscription!: Subscription;
-  currentPage: BehaviorSubject<number>;
-  page!:number;
-  totalPages!:number;
+  currentPage: BehaviorSubject<number> = new BehaviorSubject<number>(1); // Initial page is 1
+  page: number = 1;
+  totalPages!: number;
+  totalProducts!: number;
+  pageSize: number = 5; // Page size to match the backend
 
-
-  constructor(private productService: ProductService, private router: Router) {
-    this.currentPage = new BehaviorSubject<number>(this.page);
-  }
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
+    // Subscribe to page changes
     this.currentPage.subscribe((newPage) => {
-      this.subscription = this.productService
-        .getAllMovies(newPage)
-        .subscribe((response) => {
-          this.allProducts = response.results
-          this.page = response.page;
-          this.totalPages = response.total_pages;
-        });
+      this.page = newPage;
+      this.loadProducts(newPage);
     });
   }
 
-  onProductClick(movieId: number): void {
-    this.router.navigate(['/movie', movieId]);
+  loadProducts(page: number): void {
+    this.subscription = this.productService.getAllProducts(page).subscribe((response) => {
+      this.allProducts = response.productsData;
+      this.totalProducts = response.totalCount;
+      this.totalPages = Math.ceil(this.totalProducts / this.pageSize); // Calculate total pages
+    });
   }
 
-  ngOnDestroy() {
+  // Navigate to product details page
+  onProductClick(productId: number): void {
+    this.router.navigate(['/product', productId]);
+  }
+
+  // Move to the next page
+  onNextPage(): void {
+    if (this.page < this.totalPages) {
+      this.currentPage.next(this.page + 1);
+    }
+  }
+
+  // Move to the previous page
+  onPrevPage(): void {
+    if (this.page > 1) {
+      this.currentPage.next(this.page - 1);
+    }
+  }
+
+  ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
-    }
-  }
-
-  onNextPage(){
-    if (this.page < this.totalPages) {
-      this.currentPage.next(++this.page);
-    }
-  }
-
-  onPrevPage(){
-    if(this.page > 1){
-      this.currentPage.next(--this.page);
     }
   }
 }
